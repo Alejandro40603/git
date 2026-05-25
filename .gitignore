@@ -1,0 +1,32 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor config (keep .vscode/settings.json but exclude local prefs)
+.vscode/settings.local.json
+.vscode/extensions.json
+*.code-workspace
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Build output
+dist/
+build/
+*.o
+*.exe
+
+# Environment / secrets
+.env
+.env.local
+*.log
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
