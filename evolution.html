@@ -5,179 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>太岳 · 进化日志</title>
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --card: #12121a;
-    --border: #1e1e2e;
-    --accent: #7c3aed;
-    --accent2: #06b6d4;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --green: #10b981;
-    --orange: #f59e0b;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.6; }
-  header {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    padding: 3rem 2rem; text-align: center;
-  }
-  header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.5px; }
-  header p { opacity: 0.85; margin-top: 0.5rem; font-size: 1.1rem; }
-  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
-  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-  .stat-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 1.25rem; text-align: center;
-  }
-  .stat-card .num { font-size: 2rem; font-weight: 800; color: var(--accent2); }
-  .stat-card .label { color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem; }
-  h2 { font-size: 1.4rem; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
-  .timeline { position: relative; padding-left: 2rem; }
-  .timeline::before {
-    content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
-    width: 2px; background: linear-gradient(to bottom, var(--accent), var(--accent2));
-  }
-  .tl-entry {
-    position: relative; margin-bottom: 1.5rem; background: var(--card);
-    border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem;
-  }
-  .tl-entry::before {
-    content: ''; position: absolute; left: -1.75rem; top: 1.5rem;
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--accent); border: 2px solid var(--bg);
-  }
-  .tl-date { font-size: 0.85rem; color: var(--accent2); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-  .tl-title { font-size: 1.15rem; font-weight: 700; margin: 0.25rem 0 0.5rem; }
-  .badge {
-    display: inline-block; padding: 2px 8px; border-radius: 6px;
-    font-size: 0.75rem; font-weight: 600; margin-right: 4px; margin-bottom: 4px;
-  }
-  .badge-skill { background: rgba(124,58,237,0.2); color: #a78bfa; }
-  .badge-memory { background: rgba(6,182,212,0.2); color: #22d3ee; }
-  .badge-milestone { background: rgba(16,185,129,0.2); color: #34d399; }
-  .badge-service { background: rgba(245,158,11,0.2); color: #fbbf24; }
-  ul { padding-left: 1.25rem; }
-  li { margin-bottom: 0.3rem; color: var(--muted); font-size: 0.9rem; }
-  li strong { color: var(--text); }
-  .progress-bar {
-    height: 6px; background: var(--border); border-radius: 3px; margin-top: 0.75rem; overflow: hidden;
-  }
-  .progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-  footer {
-    text-align: center; padding: 2rem; color: var(--muted); font-size: 0.8rem;
-    border-top: 1px solid var(--border); margin-top: 2rem;
-  }
+  :root { --bg:#0a0a0f; --card:#12121a; --border:#1e1e2e; --accent:#7c3aed; --accent2:#06b6d4; --text:#e2e8f0; --muted:#64748b; --green:#10b981; --orange:#f59e0b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; }
+  header { background:linear-gradient(135deg,var(--accent),var(--accent2)); padding:3rem 2rem; text-align:center; }
+  header h1 { font-size:2.5rem; font-weight:800; }
+  header p { opacity:0.85; margin-top:0.5rem; font-size:1.1rem; }
+  .container { max-width:900px; margin:0 auto; padding:2rem 1.5rem; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem; margin-bottom:2rem; }
+  .stat-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.25rem; text-align:center; }
+  .stat-card .num { font-size:2rem; font-weight:800; color:var(--accent2); }
+  .stat-card .label { color:var(--muted); font-size:0.85rem; margin-top:0.25rem; }
+  h2 { font-size:1.3rem; margin:2rem 0 1rem; padding-bottom:0.5rem; border-bottom:2px solid var(--border); }
+  .timeline { position:relative; padding-left:2rem; }
+  .timeline::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:2px; background:linear-gradient(to bottom,var(--accent),var(--accent2)); }
+  .tl-entry { position:relative; margin-bottom:1.5rem; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.25rem; }
+  .tl-entry::before { content:''; position:absolute; left:-1.75rem; top:1.5rem; width:12px; height:12px; border-radius:50%; background:var(--accent); border:2px solid var(--bg); }
+  .tl-date { font-size:0.85rem; color:var(--accent2); font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+  .tl-title { font-size:1.15rem; font-weight:700; margin:0.25rem 0 0.5rem; }
+  .badge { display:inline-block; padding:2px 8px; border-radius:6px; font-size:0.75rem; font-weight:600; margin-right:4px; margin-bottom:4px; }
+  .badge-skill { background:rgba(124,58,237,0.2); color:#a78bfa; }
+  .badge-memory { background:rgba(6,182,212,0.2); color:#22d3ee; }
+  .badge-milestone { background:rgba(16,185,129,0.2); color:#34d399; }
+  .badge-service { background:rgba(245,158,11,0.2); color:#fbbf24; }
+  ul { padding-left:1.25rem; }
+  li { margin-bottom:0.3rem; color:var(--muted); font-size:0.9rem; }
+  footer { text-align:center; padding:2rem; color:var(--muted); font-size:0.8rem; border-top:1px solid var(--border); margin-top:2rem; }
 </style>
 </head>
 <body>
-
 <header>
   <h1>🧬 太岳 · 进化日志</h1>
-  <p>Hermes Agent 能力进化时间线 — 技能 · 记忆 · 服务</p>
+  <p>技能 · 记忆 · 服务 — 每日自动更新</p>
 </header>
-
 <div class="container">
+  <div class="stats">
+    <div class="stat-card"><div class="num">25</div><div class="label">内置技能</div></div>
+    <div class="stat-card"><div class="num">24</div><div class="label">自定义技能</div></div>
+    <div class="stat-card"><div class="num">0</div><div class="label">记忆条目</div></div>
+    <div class="stat-card"><div class="num">1</div><div class="label">运行服务</div></div>
+  </div>
 
-  <!-- Stats -->
-  <div class="stats" id="stats"></div>
-
-  <!-- Skills -->
-  <h2>📦 技能库</h2>
-  <div id="skills"></div>
-
-  <!-- Timeline -->
   <h2>📅 进化时间线</h2>
-  <div class="timeline" id="timeline"></div>
-
-</div>
-
-<footer>
-  自动生成 · 每日更新 · <span id="updateTime"></span>
-</footer>
-
-<script>
-// ─── DATA (auto-generated) ───
-const DATA = {
-  current: {
-    date: "2026-05-25",
-    skills: 25,
-    customSkills: ["creative","autonomous-ai-agents","github","mcp","devops","gaming","research",
-      "social-media","productivity","mlops","data-science","dogfood","email","note-taking",
-      "smart-home","red-teaming","media","diagramming","domain","inference-sh","gifs","yuanbao"],
-    memory: 12,
-    services: { camofox: true, dashboard: true, docker: true },
-    gitRepos: 1
-  },
-  timeline: [
-    {
-      date: "2026-05-25",
-      title: "基础设施就绪",
-      milestones: [
-        { type: "milestone", text: "Camofox 浏览器服务部署完成 (v150.0 beta.25)" },
-        { type: "service", text: "Docker 沙箱环境就绪" },
-        { type: "milestone", text: "Git 项目推送到 GitHub (Alejandro40603/git)" },
-        { type: "milestone", text: "VS Code + WSL Remote 开发环境配通" },
-        { type: "milestone", text: "SSH Key 自动添加到 GitHub" },
-        { type: "milestone", text: "Hermes Dashboard 构建并启动 (localhost:9119)" },
-        { type: "memory", text: "记忆系统: 12 条持久记忆 (环境/偏好/配置)" },
-        { type: "skill", text: "技能库: 25 个内置技能 + 自定义技能" },
-      ]
-    }
-  ]
-};
-
-// ─── RENDER ───
-function renderStats() {
-  const cur = DATA.current;
-  const stats = [
-    { num: cur.skills, label: "技能" },
-    { num: cur.memory, label: "记忆条目" },
-    { num: Object.values(cur.services).filter(Boolean).length, label: "运行中服务" },
-    { num: cur.gitRepos, label: "Git 仓库" },
-    { num: cur.customSkills.length, label: "自定义技能" },
-  ];
-  document.getElementById('stats').innerHTML = stats.map(s => `
-    <div class="stat-card">
-      <div class="num">${s.num}</div>
-      <div class="label">${s.label}</div>
-    </div>`).join('');
-}
-
-function renderSkills() {
-  const badges = DATA.current.customSkills.map(s => 
-    `<span class="badge badge-skill">${s}</span>`
-  ).join(' ');
-  document.getElementById('skills').innerHTML = `<p>${badges}</p>`;
-}
-
-function renderTimeline() {
-  const typeMap = { milestone: "badge-milestone", skill: "badge-skill", memory: "badge-memory", service: "badge-service" };
-  const typeLabel = { milestone: "里程碑", skill: "技能", memory: "记忆", service: "服务" };
-
-  document.getElementById('timeline').innerHTML = DATA.timeline.map((day, i) => `
+  <div class="timeline">
     <div class="tl-entry">
-      <div class="tl-date">${day.date}</div>
-      <div class="tl-title">${day.title}</div>
-      <ul>
-        ${day.milestones.map(m => `
-          <li>
-            <span class="badge ${typeMap[m.type] || 'badge-milestone'}">${typeLabel[m.type] || m.type}</span>
-            ${m.text}
-          </li>`).join('')}
-      </ul>
-      ${i < DATA.timeline.length - 1 ? '' : 
-        `<div class="progress-bar"><div class="progress-fill" style="width:${Math.min((i+1)*20, 100)}%"></div></div>`
-      }
+      <div class="tl-date">2026-05-26</div>
+      <div class="tl-title">Day 2 · 稳定运行</div>
+      <ul><li><span class="badge badge-service">服务</span> Camofox ⚠️ 未运行</li><li><span class="badge badge-service">服务</span> Dashboard ✅</li></ul>
     </div>
-  `).join('');
-}
-
-document.getElementById('updateTime').textContent = new Date().toLocaleString('zh-CN');
-renderStats();
-renderSkills();
-renderTimeline();
-</script>
-
+  </div>
+</div>
+<footer>自动生成 · 每日更新 · 2026-05-26</footer>
 </body>
 </html>
